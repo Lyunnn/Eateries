@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct Review: Codable, Identifiable {
+    
+    var id = UUID()
+    var name: String
+    var comment: String
+    
+}

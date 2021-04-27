@@ -8,12 +8,13 @@
 import Foundation
 
 struct Restaurant: Codable, Identifiable {
-    var id = UUID()
     
-//    var imgURL: URL?
-//    var imgName: String
+    var id = UUID()
+    var imgURL: URL?
+    var imgName: String
     var restName: String
-//    var location: String
+    var location: String
 //    var note: String
+//    var review: Review
 
 }
