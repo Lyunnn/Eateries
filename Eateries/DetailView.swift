@@ -27,6 +27,34 @@ struct DetailView: View {
                     EateriesApp.save()
                 })
             }
+            Section(header:
+                        HStack {
+                            Text("NOTES")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                            Button(action: { withAnimation {  } }, label: { Image(systemName: "plus") })
+                        }
+            ) {
+                ForEach(restaurant.note, id: \.self) { i in
+                    TextField("Enter restaurant name", text: $restaurant[i].note, onCommit:  {
+                        EateriesApp.save()
+                    })
+                }
+            }
+            Section(header:
+                        HStack {
+                            Text("REVIEWS")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                            Button(action: { withAnimation {  } }, label: { Image(systemName: "plus") })
+                        }
+            ) {
+                ForEach(restaurant.review, id: \.self) { i in
+                    TextField("Enter restaurant name", text: $restaurant[i].review, onCommit:  {
+                        EateriesApp.save()
+                    })
+                }
+            }
         }
     }
 }

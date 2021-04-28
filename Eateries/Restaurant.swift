@@ -15,8 +15,9 @@ class Restaurant: ObservableObject, Decodable, Encodable {
     @Published var imgName: String
     @Published var restName: String
     @Published var location: String
-//    var note: String
-//    var review: [Review]
+    @Published var note: [String]
+    @Published var review: [String]
+    
     var image: Image {
         let emptyImage = Image("nonexistent")
         guard let url = imgURL else {
@@ -32,29 +33,40 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         return Image(uiImage: uiImage)
     }
     
-    init(imgName: String, restName: String, location: String) {
+    init(imgName: String, restName: String, location: String, note: [String], review: [String]) {
         self.imgName = imgName
         self.restName = restName
         self.location = location
+        self.note = note
+        self.review = review
     }
     
     enum CodingKeys: String, CodingKey, RawRepresentable {
+        case imgURL
         case imgName
         case restName
         case location
+        case note
+        case review
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        imgURL = try container.decode(URL.self, forKey: .imgURL)
         imgName = try container.decode(String.self, forKey: .imgName)
         restName = try container.decode(String.self, forKey: .restName)
         location = try container.decode(String.self, forKey: .location)
+        note = try container.decode([String].self, forKey: .note)
+        review = try container.decode([String].self, forKey: .review)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(imgURL, forKey: .imgURL)
         try container.encode(imgName, forKey: .imgName)
         try container.encode(restName, forKey: .restName)
         try container.encode(location, forKey: .location)
+        try container.encode(note, forKey: .note)
+        try container.encode(review, forKey: .review)
     }
 }

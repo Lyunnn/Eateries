@@ -6,13 +6,12 @@
 //
 
 import Foundation
-import SwiftUI
 
 class RestViewModel: ObservableObject {
     @Published var restModel = [Restaurant]()
 
     func addRest() {
-        let newFood = Restaurant(imgName: "", restName: "<New>", location: "")
+        let newFood = Restaurant(imgName: "", restName: "<New>", location: "", note: [""], review: [""])
         restModel.append(newFood)
     }
 
