@@ -11,17 +11,17 @@ struct MasterView: View {
     @ObservedObject var restaurants: RestViewModel
     var body: some View {
         List {
-            ForEach(restaurants.restModel) {
-                NavigationLink(destination: DetailView(restaurant: $restaurants[identifiedBy: $0]), label: {
+            ForEach(restaurants.restModel, id: \.imgName) { restaurant in
+                NavigationLink(destination: DetailView(restaurant: restaurant), label: {
                     HStack {
-                        Image("\(restaurants.imgName)")
+                        Image("\(restaurant.imgName)")
                             .resizable()
                             .frame(width: 70, height: 50)
                         VStack(alignment: .leading) {
-                            Text("\(restaurants.restName)")
+                            Text("\(restaurant.restName)")
                                 .bold()
                                 .font(.callout)
-                            Text("\(restaurants.location)")
+                            Text("\(restaurant.location)")
                                 .font(.callout)
                         }
                     }

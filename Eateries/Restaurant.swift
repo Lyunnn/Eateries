@@ -6,15 +6,55 @@
 //
 
 import Foundation
+import SwiftUI
+import UIKit
 
-struct Restaurant: Codable, Identifiable {
+class Restaurant: ObservableObject, Decodable, Encodable {
     
-    var id = UUID()
-    var imgURL: URL?
-    var imgName: String
-    var restName: String
-    var location: String
+    @Published var imgURL: URL?
+    @Published var imgName: String
+    @Published var restName: String
+    @Published var location: String
 //    var note: String
 //    var review: [Review]
-
+    var image: Image {
+        let emptyImage = Image("nonexistent")
+        guard let url = imgURL else {
+            return emptyImage
+        }
+        // ...download Image
+        guard let data = try? Data(contentsOf: url) else {
+            return emptyImage
+        }
+        guard let uiImage = UIImage(data: data) else {
+            return emptyImage
+        }
+        return Image(uiImage: uiImage)
+    }
+    
+    init(imgName: String, restName: String, location: String) {
+        self.imgName = imgName
+        self.restName = restName
+        self.location = location
+    }
+    
+    enum CodingKeys: String, CodingKey, RawRepresentable {
+        case imgName
+        case restName
+        case location
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        imgName = try container.decode(String.self, forKey: .imgName)
+        restName = try container.decode(String.self, forKey: .restName)
+        location = try container.decode(String.self, forKey: .location)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(imgName, forKey: .imgName)
+        try container.encode(restName, forKey: .restName)
+        try container.encode(location, forKey: .location)
+    }
 }

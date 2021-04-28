@@ -24,15 +24,4 @@ class RestViewModel: ObservableObject {
         restModel.move(fromOffsets: indices, toOffset: newOffset)
     }
     
-    extension RestViewModel where restModel: MutableCollection, restModel.Restaurant: Identifiable {
-        /// Subscript for a given, identifiable element
-        subscript(identifiedBy element: RestViewModel.restModel) -> Binding<RestViewModel.restModel> {
-            return Binding<RestViewModel.restModel>(get: {
-                return wrappedValue.first { $0.id == element.id } ?? element
-            }, set: { newValue in
-                guard let i = wrappedValue.firstIndex(where: { $0.id == element.id }) else { return }
-                wrappedValue[i] = newValue
-            })
-        }
-    }
 }
