@@ -8,16 +8,35 @@
 import SwiftUI
 
 struct MasterView: View {
-    @Binding var restaurants: [Restaurant]
+    @ObservedObject var restaurants: RestViewModel
     var body: some View {
-        List(0..<restaurants.count) { r in
-            DetailView(restaurant: $restaurants[r])
+        List {
+            ForEach(restaurants.restModel) {
+                NavigationLink(destination: DetailView(restaurant: $restaurants[identifiedBy: $0]), label: {
+                    HStack {
+                        Image("\(restaurants.imgName)")
+                            .resizable()
+                            .frame(width: 70, height: 50)
+                        VStack(alignment: .leading) {
+                            Text("\(restaurants.restName)")
+                                .bold()
+                                .font(.callout)
+                            Text("\(restaurants.location)")
+                                .font(.callout)
+                        }
+                    }
+                })
+            }
+            .onDelete(perform: restaurants.delRest)
+            .onMove(perform: restaurants.moveRest)
         }
     }
 }
 
 //struct MasterView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        MasterView()
+//        MasterView(restaurants: Binding(get: { EateriesApp.model }, set: { newValue in
+//            EateriesApp.model = newValue
+//        }))
 //    }
 //}

@@ -15,6 +15,6 @@ struct Restaurant: Codable, Identifiable {
     var restName: String
     var location: String
 //    var note: String
-//    var review: Review
+//    var review: [Review]
 
 }
