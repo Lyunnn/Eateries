@@ -10,17 +10,13 @@ import Foundation
 class ReviewViewModel: ObservableObject {
     @Published var reviewModel = [Review]()
     
-    func addReview() {
-        let newReview = Review(name: "", comment: "")
-        reviewModel.append(newReview)
-    }
-    
-    func delReview(at indices: IndexSet) {
-        reviewModel.remove(atOffsets: indices)
-    }
-    
-    func moveReview(indices: IndexSet, newOffset: Int) {
-        reviewModel.move(fromOffsets: indices, toOffset: newOffset)
-    }
+    static var model: [Review] = {
+        guard let data = try? Data(contentsOf: EateriesApp.fileURL),
+              let model = try? JSONDecoder().decode([Review].self, from: data) else {
+            return [Review(name: "Lin Yun", comment: "Nice restaurant!"),
+                    Review(name: "Kyle", comment: "Delicious food!")]
+        }
+        return model
+    }()
     
 }

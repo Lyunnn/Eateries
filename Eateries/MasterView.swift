@@ -9,10 +9,11 @@ import SwiftUI
 
 struct MasterView: View {
     @ObservedObject var restaurants: RestViewModel
+    @ObservedObject var reviews: ReviewViewModel
     var body: some View {
         List {
             ForEach(restaurants.restModel, id: \.imgName) { restaurant in
-                NavigationLink(destination: DetailView(restaurant: restaurant), label: {
+                NavigationLink(destination: DetailView(restaurant: restaurant, review: reviews.reviewModel), label: {
                     HStack {
                         Image("\(restaurant.imgName)")
                             .resizable()

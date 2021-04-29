@@ -15,8 +15,7 @@ class Restaurant: ObservableObject, Decodable, Encodable {
     @Published var imgName: String
     @Published var restName: String
     @Published var location: String
-    @Published var note: [String]
-    @Published var review: [String]
+    @Published var note: String
     
     var image: Image {
         let emptyImage = Image("nonexistent")
@@ -33,12 +32,11 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         return Image(uiImage: uiImage)
     }
     
-    init(imgName: String, restName: String, location: String, note: [String], review: [String]) {
+    init(imgName: String, restName: String, location: String, note: String) {
         self.imgName = imgName
         self.restName = restName
         self.location = location
         self.note = note
-        self.review = review
     }
     
     enum CodingKeys: String, CodingKey, RawRepresentable {
@@ -47,7 +45,6 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         case restName
         case location
         case note
-        case review
     }
     
     required init(from decoder: Decoder) throws {
@@ -56,8 +53,7 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         imgName = try container.decode(String.self, forKey: .imgName)
         restName = try container.decode(String.self, forKey: .restName)
         location = try container.decode(String.self, forKey: .location)
-        note = try container.decode([String].self, forKey: .note)
-        review = try container.decode([String].self, forKey: .review)
+        note = try container.decode(String.self, forKey: .note)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -67,6 +63,6 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         try container.encode(restName, forKey: .restName)
         try container.encode(location, forKey: .location)
         try container.encode(note, forKey: .note)
-        try container.encode(review, forKey: .review)
+
     }
 }

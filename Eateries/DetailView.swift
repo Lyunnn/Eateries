@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailView: View {
     @Environment(\.editMode) var editMode
     @ObservedObject var restaurant: Restaurant
+    @ObservedObject var review: Review
     var body: some View {
         List {
             Section {
@@ -35,11 +36,9 @@ struct DetailView: View {
                             Button(action: { withAnimation {  } }, label: { Image(systemName: "plus") })
                         }
             ) {
-                ForEach(restaurant.note, id: \.self) { i in
-                    TextField("Enter restaurant name", text: $restaurant[i].note, onCommit:  {
-                        EateriesApp.save()
-                    })
-                }
+                TextField("Enter restaurant notes", text: $restaurant.note, onCommit:  {
+                    EateriesApp.save()
+                })
             }
             Section(header:
                         HStack {
@@ -49,8 +48,11 @@ struct DetailView: View {
                             Button(action: { withAnimation {  } }, label: { Image(systemName: "plus") })
                         }
             ) {
-                ForEach(restaurant.review, id: \.self) { i in
-                    TextField("Enter restaurant name", text: $restaurant[i].review, onCommit:  {
+                VStack {
+                    TextField("Enter name", text: $review.name, onCommit:  {
+                        EateriesApp.save()
+                    })
+                    TextField("Enter comment", text: $review.comment, onCommit:  {
                         EateriesApp.save()
                     })
                 }
