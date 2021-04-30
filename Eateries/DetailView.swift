@@ -10,7 +10,6 @@ import SwiftUI
 struct DetailView: View {
     @Environment(\.editMode) var editMode
     @ObservedObject var restaurant: Restaurant
-    @ObservedObject var review: Review
     var body: some View {
         List {
             Section {
@@ -49,12 +48,11 @@ struct DetailView: View {
                         }
             ) {
                 VStack {
-                    TextField("Enter name", text: $review.name, onCommit:  {
-                        EateriesApp.save()
-                    })
-                    TextField("Enter comment", text: $review.comment, onCommit:  {
-                        EateriesApp.save()
-                    })
+                    ForEach(restaurant.review, id: \.name) { reviews in
+                        TextField("Enter name", text: $restaurant.review[reviews], onCommit:  {
+                            EateriesApp.save()
+                        })
+                    }
                 }
             }
         }

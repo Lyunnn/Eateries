@@ -16,6 +16,8 @@ class Restaurant: ObservableObject, Decodable, Encodable {
     @Published var restName: String
     @Published var location: String
     @Published var note: String
+    @Published var review: [Review]
+//    @Published var review: [Review]?
     
     var image: Image {
         let emptyImage = Image("nonexistent")
@@ -32,11 +34,12 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         return Image(uiImage: uiImage)
     }
     
-    init(imgName: String, restName: String, location: String, note: String) {
+    init(imgName: String, restName: String, location: String, note: String, review: [Review]) {
         self.imgName = imgName
         self.restName = restName
         self.location = location
         self.note = note
+        self.review = review
     }
     
     enum CodingKeys: String, CodingKey, RawRepresentable {
@@ -45,6 +48,7 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         case restName
         case location
         case note
+        case review
     }
     
     required init(from decoder: Decoder) throws {
@@ -54,6 +58,7 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         restName = try container.decode(String.self, forKey: .restName)
         location = try container.decode(String.self, forKey: .location)
         note = try container.decode(String.self, forKey: .note)
+        review = try container.decode([Review].self, forKey: .review)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -63,6 +68,19 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         try container.encode(restName, forKey: .restName)
         try container.encode(location, forKey: .location)
         try container.encode(note, forKey: .note)
-
+        try container.encode(review, forKey: .review)
     }
+    
+//    var count: Int {
+//        var count = 0
+//        for _ in review! {
+//            count+=1
+//        }
+//        return count
+//    }
+//
+//    subscript(index: Int) -> Review? {
+//        guard let reviews = review?[index] else { return nil}
+//        return reviews
+//    }
 }

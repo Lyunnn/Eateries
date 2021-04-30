@@ -13,7 +13,7 @@ class ReviewViewModel: ObservableObject {
     static var model: [Review] = {
         guard let data = try? Data(contentsOf: EateriesApp.fileURL),
               let model = try? JSONDecoder().decode([Review].self, from: data) else {
-            return [Review(name: "Lin Yun", comment: "Nice restaurant!"),
+            return [Review(name: "Lyun", comment: "Nice restaurant!"),
                     Review(name: "Kyle", comment: "Delicious food!")]
         }
         return model
