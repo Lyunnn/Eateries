@@ -45,14 +45,17 @@ struct DetailView: View {
                                 .font(.title3)
                                 .fontWeight(.bold)
                             Button(action: { withAnimation {  } }, label: { Image(systemName: "plus") })
-                        }
-            ) {
-                VStack {
-                    ForEach(restaurant.review, id: \.name) { reviews in
-                        TextField("Enter name", text: $restaurant.review[reviews], onCommit:  {
-                            EateriesApp.save()
                         })
-                    }
+            {
+                VStack {
+//                    ForEach(restaurant.review, id: \.name) { reviews in
+//                        TextField("Enter name", text: $restaurant.review[reviews], onCommit:  {
+//                            EateriesApp.save()
+//                        })
+//                    }
+                    TextField("Enter name", text: $restaurant.review.name, onCommit:  {
+                        EateriesApp.save()
+                    })
                 }
             }
         }

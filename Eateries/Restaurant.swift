@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
+@dynamicMemberLookup
 class Restaurant: ObservableObject, Decodable, Encodable {
     
     @Published var imgURL: URL?
@@ -71,16 +72,8 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         try container.encode(review, forKey: .review)
     }
     
-//    var count: Int {
-//        var count = 0
-//        for _ in review! {
-//            count+=1
-//        }
-//        return count
-//    }
-//
-//    subscript(index: Int) -> Review? {
-//        guard let reviews = review?[index] else { return nil}
-//        return reviews
-//    }
+    subscript<T>(dynamicMember keyPath: KeyPath<[Review], T>) -> T {
+        return review[keyPath: keyPath]
+    }
+    
 }
