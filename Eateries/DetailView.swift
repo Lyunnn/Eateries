@@ -53,7 +53,7 @@ struct DetailView: View {
 //                            EateriesApp.save()
 //                        })
 //                    }
-                    TextField("Enter name", text: $restaurant.review.name, onCommit:  {
+                    TextField("Enter name", text: $restaurant.name, onCommit:  {
                         EateriesApp.save()
                     })
                 }

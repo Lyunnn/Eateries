@@ -77,3 +77,14 @@ class Restaurant: ObservableObject, Decodable, Encodable {
     }
     
 }
+
+extension Restaurant {
+    subscript<T>(dynamicMember keyPath: WritableKeyPath<[Review], T>) -> T {
+        get {
+            return review[keyPath: keyPath]
+        }
+        set {
+            return review[keyPath: keyPath] = newValue
+        }
+    }
+}
