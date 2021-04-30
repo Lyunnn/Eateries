@@ -12,7 +12,9 @@ struct MasterView: View {
     var body: some View {
         List {
             ForEach(restaurants.restModel, id: \.imgName) { restaurant in
-                NavigationLink(destination: DetailView(restaurant: restaurant), label: {
+                NavigationLink(destination: DetailView(restaurant: restaurant)
+                                .navigationBarItems(trailing: EditButton())
+                               , label: {
                     HStack {
                         Image("\(restaurant.imgName)")
                             .resizable()
@@ -33,10 +35,8 @@ struct MasterView: View {
     }
 }
 
-//struct MasterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MasterView(restaurants: Binding(get: { EateriesApp.model }, set: { newValue in
-//            EateriesApp.model = newValue
-//        }))
-//    }
-//}
+struct MasterView_Previews: PreviewProvider {
+    static var previews: some View {
+        MasterView(restaurants: RestViewModel())
+    }
+}

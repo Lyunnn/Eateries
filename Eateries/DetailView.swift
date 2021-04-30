@@ -47,23 +47,28 @@ struct DetailView: View {
                             Button(action: { withAnimation {  } }, label: { Image(systemName: "plus") })
                         })
             {
-                VStack {
-//                    ForEach(restaurant.review, id: \.name) { reviews in
-//                        TextField("Enter name", text: $restaurant.review[reviews], onCommit:  {
-//                            EateriesApp.save()
-//                        })
-//                    }
-                    TextField("Enter name", text: $restaurant.name, onCommit:  {
+                // 1
+                ForEach(restaurant.review, id: \.name) { i in
+                    TextField("Enter name", text: $restaurant.review[i], onCommit:  {
                         EateriesApp.save()
                     })
                 }
+                // 2
+//                VStack {
+//                    TextField("Enter name", text: $restaurant.name, onCommit:  {
+//                        EateriesApp.save()
+//                    })
+//                    TextField("Enter name", text: $restaurant.comment, onCommit:  {
+//                        EateriesApp.save()
+//                    })
+//                }
             }
         }
     }
 }
 
-//struct DetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailView()
-//    }
-//}
+struct DetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailView(restaurant: Restaurant(imgName: "BSKT", restName: "BSKT Cafe", location: "4 Lavarack Rd, GC", note: "", review: [Review(name: "Lyun", comment: "Nice restaurant!")]))
+    }
+}
