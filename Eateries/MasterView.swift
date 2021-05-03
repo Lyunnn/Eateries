@@ -11,14 +11,17 @@ struct MasterView: View {
     @ObservedObject var restaurants: RestListViewModel
     var body: some View {
         List {
-            ForEach(restaurants.modelList, id: \.model.imgName) { restaurant in
+            ForEach(restaurants.modelList, id: \.model.restName) { restaurant in
                 NavigationLink(destination: DetailView(restaurant: restaurant)
                                 .navigationBarItems(trailing: EditButton())
                                , label: {
                     HStack {
-                        Image("\(restaurant.model.imgName)")
+//                        Image("\(restaurant.model.imgName)")
+//                            .resizable()
+//                            .frame(width: 80, height: 60)
+                        restaurant.image
                             .resizable()
-                            .frame(width: 70, height: 50)
+                            .frame(width: 80, height: 60)
                         VStack(alignment: .leading) {
                             Text("\(restaurant.model.restName)")
                                 .bold()
@@ -37,6 +40,6 @@ struct MasterView: View {
 
 struct MasterView_Previews: PreviewProvider {
     static var previews: some View {
-        MasterView(restaurants: RestListViewModel(modelList: [RestViewModel(model: Restaurant(imgName: "", restName: "", location: "", note: "", review: [ReviewViewModel(reviews: Review(name: "", comment: ""))]))]))
+        MasterView(restaurants: RestListViewModel(modelList: [RestViewModel(model: Restaurant(imgName: "", restName: "", location: "", note: "", review: [ReviewViewModel(reviews: Review(name: "", comment: ""))]))], titleStr: ""))
     }
 }

@@ -4,10 +4,28 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Eateries.xcscheme_^#shared#^_</key>
+		<key>Eateries.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>78C9B77F2637F79900C378CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78C9B7902637F79B00C378CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78C9B79B2637F79B00C378CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

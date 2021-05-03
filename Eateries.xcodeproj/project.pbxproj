@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		782FC3C1263FBB8500D9219B /* RestListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C9B7D02637F88F00C378CB /* RestListViewModel.swift */; };
+		782FC3E3264000C200D9219B /* NavTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782FC3E2264000C200D9219B /* NavTitle.swift */; };
 		78C9B7842637F79900C378CB /* EateriesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C9B7832637F79900C378CB /* EateriesApp.swift */; };
 		78C9B7862637F79900C378CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C9B7852637F79900C378CB /* ContentView.swift */; };
 		78C9B7882637F79A00C378CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78C9B7872637F79A00C378CB /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		782FC3E2264000C200D9219B /* NavTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavTitle.swift; sourceTree = "<group>"; };
 		78C9B7802637F79900C378CB /* Eateries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eateries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C9B7832637F79900C378CB /* EateriesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EateriesApp.swift; sourceTree = "<group>"; };
 		78C9B7852637F79900C378CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				78C9B7D02637F88F00C378CB /* RestListViewModel.swift */,
 				78C9B7D52637F8A500C378CB /* Review.swift */,
 				78C9B7DA2637F8B800C378CB /* ReviewViewModel.swift */,
+				782FC3E2264000C200D9219B /* NavTitle.swift */,
 				78C9B7832637F79900C378CB /* EateriesApp.swift */,
 				78C9B7852637F79900C378CB /* ContentView.swift */,
 				78C9B7B12637F7DA00C378CB /* MasterView.swift */,
@@ -282,6 +285,7 @@
 			files = (
 				78C9B7D62637F8A500C378CB /* Review.swift in Sources */,
 				78C9B7CC2637F87400C378CB /* RestViewModel.swift in Sources */,
+				782FC3E3264000C200D9219B /* NavTitle.swift in Sources */,
 				782FC3C1263FBB8500D9219B /* RestListViewModel.swift in Sources */,
 				78C9B7DB2637F8B800C378CB /* ReviewViewModel.swift in Sources */,
 				78C9B7BF2637F83400C378CB /* Restaurant.swift in Sources */,

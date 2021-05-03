@@ -9,23 +9,28 @@ import Foundation
 
 class RestListViewModel: ObservableObject, Decodable, Encodable {
     @Published var modelList: Array<RestViewModel>
+    @Published var titleStr: String
     
-    init(modelList: Array<RestViewModel>) {
+    init(modelList: Array<RestViewModel>, titleStr: String) {
         self.modelList = modelList
+        self.titleStr = titleStr
     }
     
     enum CodingKeys: String, CodingKey, RawRepresentable {
         case modelList
+        case titleStr
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         modelList = try container.decode(Array<RestViewModel>.self, forKey: .modelList)
+        titleStr = try container.decode(String.self, forKey: .titleStr)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(modelList, forKey: .modelList)
+        try container.encode(titleStr, forKey: .titleStr)
     }
     
     func addRest() {

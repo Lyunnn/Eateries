@@ -99,6 +99,7 @@ struct DetailView: View {
             }
         } else {
             restImg
+//            Image("\(restaurant.model.imgName)")
             ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
                     Text("\(restaurant.model.restName)")
