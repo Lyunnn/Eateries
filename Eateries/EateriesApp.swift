@@ -9,16 +9,19 @@ import SwiftUI
 
 @main
 struct EateriesApp: App {
-    @ObservedObject var restModel: RestViewModel = {
-        var restaurant = RestViewModel.model
-        var model = RestViewModel()
-        model.restModel = restaurant
+    static var appModel: RestListViewModel = RestListViewModel(modelList: [RestViewModel(model: Restaurant(imgName: "BSKT", restName: "BSKT Cafe", location: "4 Lavarack Rd, GC", note: "", review: [ReviewViewModel(reviews: Review(name: "Lyun", comment: "Nice restaurant!"))])), RestViewModel(model: Restaurant(imgName: "dbKitchen", restName: "DB Kitchen & Bar", location: "1 The Concourse Benowa, GC", note: "", review: [ReviewViewModel(reviews: Review(name: "Kyle", comment: "Delicious food!"))])),
+            RestViewModel(model: Restaurant(imgName: "NoNameLane", restName: "No Name Lane", location: "GC", note: "", review: [ReviewViewModel(reviews: Review(name: "Jason", comment: "Great services!"))]))])
+    
+    static var model: RestListViewModel = {
+        guard let data = try? Data(contentsOf: EateriesApp.fileURL),
+              let model = try? JSONDecoder().decode(RestListViewModel.self, from: data) else {
+            return EateriesApp.appModel }
         return model
     }()
     
     var body: some Scene {
         WindowGroup {
-            ContentView(restaurants: restModel)
+            ContentView(restaurants: EateriesApp.model)
         }
     }
     
@@ -34,7 +37,7 @@ struct EateriesApp: App {
     
     static func save() {
         do {
-            let data = try JSONEncoder().encode(RestViewModel.model)
+            let data = try JSONEncoder().encode(EateriesApp.model)
             try data.write(to: fileURL, options: .atomic)
             // dataString to show if the data is saved, to debug
             guard let dataString = String(data: data, encoding: .utf8) else { return }

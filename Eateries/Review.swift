@@ -35,17 +35,4 @@ class Review: ObservableObject, Decodable, Encodable {
 
     }
     
-    //    var count: Int {
-    //        var count = 0
-    //        for _ in review! {
-    //            count+=1
-    //        }
-    //        return count
-    //    }
-    //
-    //    subscript(index: Int) -> Review? {
-    //        guard let reviews = review?[index] else { return nil}
-    //        return reviews
-    //    }
-    
 }

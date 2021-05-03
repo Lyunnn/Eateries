@@ -6,36 +6,16 @@
 //
 
 import Foundation
-import SwiftUI
-import UIKit
 
-@dynamicMemberLookup
 class Restaurant: ObservableObject, Decodable, Encodable {
     
-    @Published var imgURL: URL?
     @Published var imgName: String
     @Published var restName: String
     @Published var location: String
     @Published var note: String
-    @Published var review: [Review]
-//    @Published var review: [Review]?
+    @Published var review: Array<ReviewViewModel>
     
-    var image: Image {
-        let emptyImage = Image("nonexistent")
-        guard let url = imgURL else {
-            return emptyImage
-        }
-        // ...download Image
-        guard let data = try? Data(contentsOf: url) else {
-            return emptyImage
-        }
-        guard let uiImage = UIImage(data: data) else {
-            return emptyImage
-        }
-        return Image(uiImage: uiImage)
-    }
-    
-    init(imgName: String, restName: String, location: String, note: String, review: [Review]) {
+    init(imgName: String, restName: String, location: String, note: String, review: Array<ReviewViewModel>) {
         self.imgName = imgName
         self.restName = restName
         self.location = location
@@ -44,7 +24,6 @@ class Restaurant: ObservableObject, Decodable, Encodable {
     }
     
     enum CodingKeys: String, CodingKey, RawRepresentable {
-        case imgURL
         case imgName
         case restName
         case location
@@ -54,17 +33,15 @@ class Restaurant: ObservableObject, Decodable, Encodable {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        imgURL = try container.decode(URL.self, forKey: .imgURL)
         imgName = try container.decode(String.self, forKey: .imgName)
         restName = try container.decode(String.self, forKey: .restName)
         location = try container.decode(String.self, forKey: .location)
         note = try container.decode(String.self, forKey: .note)
-        review = try container.decode([Review].self, forKey: .review)
+        review = try container.decode(Array<ReviewViewModel>.self, forKey: .review)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(imgURL, forKey: .imgURL)
         try container.encode(imgName, forKey: .imgName)
         try container.encode(restName, forKey: .restName)
         try container.encode(location, forKey: .location)
@@ -72,19 +49,4 @@ class Restaurant: ObservableObject, Decodable, Encodable {
         try container.encode(review, forKey: .review)
     }
     
-    subscript<T>(dynamicMember keyPath: KeyPath<[Review], T>) -> T {
-        return review[keyPath: keyPath]
-    }
-    
-}
-
-extension Restaurant {
-    subscript<T>(dynamicMember keyPath: WritableKeyPath<[Review], T>) -> T {
-        get {
-            return review[keyPath: keyPath]
-        }
-        set {
-            return review[keyPath: keyPath] = newValue
-        }
-    }
 }

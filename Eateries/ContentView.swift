@@ -9,7 +9,7 @@ import SwiftUI
 
 //var modify = RestViewModel()
 struct ContentView: View {
-    @ObservedObject var restaurants: RestViewModel
+    @ObservedObject var restaurants: RestListViewModel
     var body: some View {
         NavigationView {
             MasterView(restaurants: restaurants)
@@ -24,9 +24,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(restaurants: RestViewModel())
-//        ContentView(restaurants: Binding(get: { RestViewModel.model }, set: { newValue in
-//            RestViewModel.model = newValue
-//        }))
+        ContentView(restaurants: RestListViewModel(modelList: [RestViewModel(model: Restaurant(imgName: "", restName: "", location: "", note: "", review: [ReviewViewModel(reviews: Review(name: "", comment: ""))]))]))
     }
 }

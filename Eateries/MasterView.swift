@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct MasterView: View {
-    @ObservedObject var restaurants: RestViewModel
+    @ObservedObject var restaurants: RestListViewModel
     var body: some View {
         List {
-            ForEach(restaurants.restModel, id: \.imgName) { restaurant in
+            ForEach(restaurants.modelList, id: \.model.imgName) { restaurant in
                 NavigationLink(destination: DetailView(restaurant: restaurant)
                                 .navigationBarItems(trailing: EditButton())
                                , label: {
                     HStack {
-                        Image("\(restaurant.imgName)")
+                        Image("\(restaurant.model.imgName)")
                             .resizable()
                             .frame(width: 70, height: 50)
                         VStack(alignment: .leading) {
-                            Text("\(restaurant.restName)")
+                            Text("\(restaurant.model.restName)")
                                 .bold()
                                 .font(.callout)
-                            Text("\(restaurant.location)")
+                            Text("\(restaurant.model.location)")
                                 .font(.callout)
                         }
                     }
@@ -37,6 +37,6 @@ struct MasterView: View {
 
 struct MasterView_Previews: PreviewProvider {
     static var previews: some View {
-        MasterView(restaurants: RestViewModel())
+        MasterView(restaurants: RestListViewModel(modelList: [RestViewModel(model: Restaurant(imgName: "", restName: "", location: "", note: "", review: [ReviewViewModel(reviews: Review(name: "", comment: ""))]))]))
     }
 }
