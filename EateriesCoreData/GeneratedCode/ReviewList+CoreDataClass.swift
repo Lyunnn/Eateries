@@ -2,7 +2,7 @@
 //  ReviewList+CoreDataClass.swift
 //  Eateries
 //
-//  Created by Lin Yun Kee on 9/5/21.
+//  Created by Lin Yun Kee on 12/5/21.
 //
 //
 

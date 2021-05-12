@@ -13,9 +13,9 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let restaurants = Restaurant(context: viewContext)
-            restaurants.restName = ""
+        for _ in 1...5 {
+            let restaurant = Restaurant(context: viewContext)
+            restaurant.restName = "Restaurant"
         }
         do {
             try viewContext.save()

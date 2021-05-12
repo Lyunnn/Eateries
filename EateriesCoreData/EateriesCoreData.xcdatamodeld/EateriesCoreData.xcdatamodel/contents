@@ -6,10 +6,9 @@
         <attribute name="note" attributeType="String" defaultValueString=""/>
         <attribute name="restName" attributeType="String" defaultValueString=""/>
         <relationship name="restList" maxCount="1" deletionRule="Nullify" destinationEntity="RestaurantList" inverseName="restaurants" inverseEntity="RestaurantList"/>
-        <relationship name="review" toMany="YES" deletionRule="Nullify" destinationEntity="ReviewList" inverseName="restaurant" inverseEntity="ReviewList"/>
+        <relationship name="reviewArr" maxCount="1" deletionRule="Nullify" destinationEntity="ReviewList" inverseName="restaurant" inverseEntity="ReviewList"/>
     </entity>
     <entity name="RestaurantList" representedClassName="RestaurantList" syncable="YES" codeGenerationType="class">
-        <attribute name="modelList" optional="YES" attributeType="String"/>
         <relationship name="restaurants" toMany="YES" deletionRule="Nullify" destinationEntity="Restaurant" inverseName="restList" inverseEntity="Restaurant"/>
     </entity>
     <entity name="Review" representedClassName="Review" syncable="YES" codeGenerationType="class">
@@ -18,14 +17,13 @@
         <relationship name="reviewList" maxCount="1" deletionRule="Nullify" destinationEntity="ReviewList" inverseName="reviews" inverseEntity="ReviewList"/>
     </entity>
     <entity name="ReviewList" representedClassName="ReviewList" syncable="YES" codeGenerationType="class">
-        <attribute name="reviewModelList" attributeType="String"/>
-        <relationship name="restaurant" maxCount="1" deletionRule="Nullify" destinationEntity="Restaurant" inverseName="review" inverseEntity="Restaurant"/>
+        <relationship name="restaurant" maxCount="1" deletionRule="Nullify" destinationEntity="Restaurant" inverseName="reviewArr" inverseEntity="Restaurant"/>
         <relationship name="reviews" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Review" inverseName="reviewList" inverseEntity="Review"/>
     </entity>
     <elements>
-        <element name="Restaurant" positionX="-736.5" positionY="14" width="128" height="133"/>
+        <element name="Restaurant" positionX="-730.5" positionY="14" width="128" height="133"/>
+        <element name="RestaurantList" positionX="-963" positionY="-23" width="128" height="58"/>
         <element name="Review" positionX="-264" positionY="0" width="128" height="88"/>
-        <element name="RestaurantList" positionX="-963" positionY="-23" width="128" height="73"/>
-        <element name="ReviewList" positionX="-528" positionY="-26" width="128" height="88"/>
+        <element name="ReviewList" positionX="-522" positionY="-26" width="128" height="73"/>
     </elements>
 </model>

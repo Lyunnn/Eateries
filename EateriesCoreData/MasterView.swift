@@ -7,18 +7,42 @@
 
 import SwiftUI
 
-struct MasterView: View {
+struct RowView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var restaurant: Restaurant
     var body: some View {
-        List {
-            ForEach(items) { item in
-                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+        HStack {
+            restaurant.image
+                .resizable()
+                .frame(width: 80, height: 60)
+            VStack(alignment: .leading) {
+                Text("\(restaurant.nameStr)")
+                    .bold()
+                    .font(.callout)
+                Text("\(restaurant.locationStr)")
+                    .font(.callout)
             }
         }
     }
 }
 
-struct MasterView_Previews: PreviewProvider {
-    static var previews: some View {
-        MasterView()
+struct MasterView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var restaurantList: RestaurantList
+    var body: some View {
+        List {
+            ForEach(restaurantList.restArray) { restaurant in
+                NavigationLink(destination: DetailView(), label: {
+                    RowView(restaurant: restaurant)
+                })
+            }
+            .onDelete(perform: withAnimation { restaurantList.deleteItems } )
+        }
     }
 }
+
+//struct MasterView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MasterView()
+//    }
+//}
