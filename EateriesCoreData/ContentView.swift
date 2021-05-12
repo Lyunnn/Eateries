@@ -10,21 +10,16 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @ObservedObject var restaurantList: RestaurantList
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \RestaurantList.restArray, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \RestaurantList.restaurants, ascending: true)],
         animation: .default)
     private var restaurants: FetchedResults<RestaurantList>
 
     var body: some View {
         NavigationView {
-            MasterView()
+            MasterView(restaurantList: RestaurantList(context: viewContext))
                 .navigationTitle("Eateries")
-                .navigationBarItems(
-                    leading: EditButton(),
-                    trailing: Button(action: { withAnimation {/*add new list item*/ restaurantList.addItem() } }, label: { Image(systemName: "plus") })
-                )
         }
     }
 

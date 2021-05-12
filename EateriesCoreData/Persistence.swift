@@ -9,14 +9,37 @@ import CoreData
 
 struct PersistenceController {
     static let shared = PersistenceController()
+    
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 1...5 {
-            let restaurant = Restaurant(context: viewContext)
-            restaurant.restName = "Restaurant"
-        }
+        let restaurantList = RestaurantList(context: viewContext)
+        let restaurant = Restaurant(context: viewContext)
+        let reviewList = ReviewList(context: viewContext)
+        let review = Review(context: viewContext)
+        restaurant.imgName = "https://www.insidegoldcoast.com.au/wp-content/uploads/2017/08/DSC_0189-1200x800.jpg"
+        restaurant.restName = "BSKT Cafe"
+        restaurant.location = "4 Lavarack Rd, GC"
+        restaurant.note = "Dog and kid friendly"
+        reviewList.reviewArray = [review]
+        review.name = "Lin Yun Kee"
+        review.comment = "Nice restaurant!"
+        restaurantList.restArray = Array(arrayLiteral: restaurant) // [restaurant)]
+        let reviewModel = [review.name: "Kyle", review.comment: "Delicious food!"]
+        let restModel = [restaurant.imgName: "https://www.insidegoldcoast.com.au/wp-content/uploads/2019/10/504A8731-2-1200x814.jpg", restaurant.restName: "DB Kitchen & Bar", restaurant.location: "1 The Concourse Benowa, GC", restaurant.note: "Start from 7am"]
+//        for _ in 1...5 {
+//            restaurant.imgName = "https://www.insidegoldcoast.com.au/wp-content/uploads/2017/08/DSC_0189-1200x800.jpg"
+//            restaurant.restName = "BSKT Cafe"
+//            restaurant.location = "4 Lavarack Rd, GC"
+//            restaurant.note = "Dog and kid friendly"
+//            reviewList.reviewArray = [review]
+//            review.name = "Lin Yun Kee"
+//            review.comment = "Nice restaurant!"
+//            restaurantList.restArray = Array(arrayLiteral: restaurant) // [restaurant)]
+//            let reviewModel = [review.name: "Kyle", review.comment: "Delicious food!"]
+//            let restModel = [restaurant.imgName: "https://www.insidegoldcoast.com.au/wp-content/uploads/2019/10/504A8731-2-1200x814.jpg", restaurant.restName: "DB Kitchen & Bar", restaurant.location: "1 The Concourse Benowa, GC", restaurant.note: "Start from 7am", reviewModel]
+//        }
         do {
             try viewContext.save()
         } catch {

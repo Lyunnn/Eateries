@@ -32,12 +32,16 @@ struct MasterView: View {
     var body: some View {
         List {
             ForEach(restaurantList.restArray) { restaurant in
-                NavigationLink(destination: DetailView(), label: {
+                NavigationLink(destination: DetailView(restaurant: restaurant), label: {
                     RowView(restaurant: restaurant)
                 })
             }
             .onDelete(perform: withAnimation { restaurantList.deleteItems } )
         }
+        .navigationBarItems(
+            leading: EditButton(),
+            trailing: Button(action: { withAnimation {/*add new list item*/ restaurantList.addItem() } }, label: { Image(systemName: "plus") })
+        )
     }
 }
 
