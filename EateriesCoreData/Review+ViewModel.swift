@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+extension Review {
+    
+    var nameStr: String {
+        get { name ?? "" }
+        set { name = newValue }
+    }
+    var commentStr: String {
+        get { comment ?? "" }
+        set { comment = newValue }
+    }
+    
+}

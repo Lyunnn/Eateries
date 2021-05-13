@@ -14,32 +14,39 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
+        
         let restaurantList = RestaurantList(context: viewContext)
-        let restaurant = Restaurant(context: viewContext)
-        let reviewList = ReviewList(context: viewContext)
-        let review = Review(context: viewContext)
-        restaurant.imgName = "https://www.insidegoldcoast.com.au/wp-content/uploads/2017/08/DSC_0189-1200x800.jpg"
-        restaurant.restName = "BSKT Cafe"
-        restaurant.location = "4 Lavarack Rd, GC"
-        restaurant.note = "Dog and kid friendly"
-        reviewList.reviewArray = [review]
-        review.name = "Lin Yun Kee"
-        review.comment = "Nice restaurant!"
-        restaurantList.restArray = Array(arrayLiteral: restaurant) // [restaurant)]
-        let reviewModel = [review.name: "Kyle", review.comment: "Delicious food!"]
-        let restModel = [restaurant.imgName: "https://www.insidegoldcoast.com.au/wp-content/uploads/2019/10/504A8731-2-1200x814.jpg", restaurant.restName: "DB Kitchen & Bar", restaurant.location: "1 The Concourse Benowa, GC", restaurant.note: "Start from 7am"]
-//        for _ in 1...5 {
-//            restaurant.imgName = "https://www.insidegoldcoast.com.au/wp-content/uploads/2017/08/DSC_0189-1200x800.jpg"
-//            restaurant.restName = "BSKT Cafe"
-//            restaurant.location = "4 Lavarack Rd, GC"
-//            restaurant.note = "Dog and kid friendly"
-//            reviewList.reviewArray = [review]
-//            review.name = "Lin Yun Kee"
-//            review.comment = "Nice restaurant!"
-//            restaurantList.restArray = Array(arrayLiteral: restaurant) // [restaurant)]
-//            let reviewModel = [review.name: "Kyle", review.comment: "Delicious food!"]
-//            let restModel = [restaurant.imgName: "https://www.insidegoldcoast.com.au/wp-content/uploads/2019/10/504A8731-2-1200x814.jpg", restaurant.restName: "DB Kitchen & Bar", restaurant.location: "1 The Concourse Benowa, GC", restaurant.note: "Start from 7am", reviewModel]
-//        }
+        
+        let restaurant1 = Restaurant(context: viewContext)
+        restaurant1.imgName = "https://www.insidegoldcoast.com.au/wp-content/uploads/2017/08/DSC_0189-1200x800.jpg"
+        restaurant1.location = "4 Lavarack Rd, GC"
+        restaurant1.note = "Dog and kid friendly"
+        let review1 = Review(context: viewContext)
+        review1.name = "Lin Yun Kee"
+        review1.comment = "Nice restaurant!"
+        
+        let restaurant2 = Restaurant(context: viewContext)
+        restaurant2.imgName = "https://www.insidegoldcoast.com.au/wp-content/uploads/2019/10/504A8731-2-1200x814.jpg"
+        restaurant2.location = ""
+        restaurant2.note = ""
+        let review2 = Review(context: viewContext)
+        review2.name = ""
+        review2.comment = ""
+        
+        let restaurant3 = Restaurant(context: viewContext)
+        restaurant3.imgName = "https://b.zmtcdn.com/data/pictures/1/16613961/76fb875422e913f3938c21ff77e02489.jpg"
+        restaurant3.location = ""
+        restaurant3.note = ""
+        let review3 = Review(context: viewContext)
+        review3.name = ""
+        review3.comment = ""
+        
+        
+//        let restList1 = [restaurant.restName: "BSKT Cafe", restaurant.location: "4 Lavarack Rd, GC", restaurant.note: "Dog and kid friendly", review.name: "Lin Yun Kee", review.comment: "Nice restaurant!"]
+//        let restList2 = [restaurant.imgName: "", restaurant.restName: "DB Kitchen & Bar", restaurant.location: "1 The Concourse Benowa, GC", restaurant.note: "Start from 7am", review.name: "Kylie", review.comment: "Delicious food!"]
+//        let restList3 = [restaurant.imgName: "", restaurant.restName: "No Name Lane", restaurant.location: "GC", restaurant.note: "Breakfast | Lunch | Bar", review.name: "Jason", review.comment: "Great services!"]
+        
+        
         do {
             try viewContext.save()
         } catch {
@@ -52,6 +59,7 @@ struct PersistenceController {
     }()
 
     let container: NSPersistentContainer
+    
 
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "EateriesCoreData")

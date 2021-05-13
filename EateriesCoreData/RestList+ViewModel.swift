@@ -11,8 +11,8 @@ import CoreData
 extension RestaurantList {
     
     var restArray: [Restaurant] {
-        get { restaurants?.allObjects as? [Restaurant] ?? [] }
-        set { restaurants = NSSet(array: newValue) }
+        get { restaurants?.array as? [Restaurant] ?? [] }
+        set { restaurants = NSOrderedSet(array: newValue) }
     }
     
     var viewContext: NSManagedObjectContext {

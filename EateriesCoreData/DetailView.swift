@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ReviewTextField: View {
     @Environment(\.managedObjectContext) private var viewContext
+//    @FetchRequest(entity: Review.entity(), sortDescriptors: []) var reviews:FetchedResults<Review>
     @ObservedObject var reviews: Review
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -98,9 +99,9 @@ struct DetailView: View {
                                         .background(Color.yellow)
                                 })
                     {
-//                        ForEach(restaurant.reviewArr, id: \.nameStr) { review in
-//                            ReviewTextField(reviews: review)
-//                        }
+                        ForEach(restaurant.reviewArray, id: \.nameStr) { review in
+                            ReviewTextField(reviews: review)
+                        }
                     }
                     Spacer()
                 }
@@ -138,9 +139,9 @@ struct DetailView: View {
                                         .background(Color.yellow)
                                 })
                     {
-//                        ForEach(restaurant.reviewArr, id: \.reviews.name) { review in
-//                            ReviewView(reviews: review)
-//                        }
+                        ForEach(restaurant.reviewArray, id: \.nameStr) { review in
+                            ReviewView(reviews: review)
+                        }
                     }
                     Spacer()
                 }
@@ -152,6 +153,6 @@ struct DetailView: View {
 
 //struct DetailView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        DetailView()
+//        DetailView(restaurant: Restaurant()
 //    }
 //}
